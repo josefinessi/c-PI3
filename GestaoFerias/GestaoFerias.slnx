@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/GestaoFerias.API/GestaoFerias.API.csproj" />
+    <Project Path="src/GestaoFerias.Application/GestaoFerias.Application.csproj" />
+    <Project Path="src/GestaoFerias.Domain/GestaoFerias.Domain.csproj" />
+    <Project Path="src/GestaoFerias.Infrastructure/GestaoFerias.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/GestaoFerias.Tests/GestaoFerias.Tests.csproj" />
+  </Folder>
+</Solution>

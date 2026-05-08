@@ -1,0 +1,87 @@
+.pendentes-list { display: flex; flex-direction: column; gap: 1rem; }
+
+.pendente-card { border-left: 4px solid #d97706; }
+
+.pendente-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.pendente-user { display: flex; align-items: center; gap: 0.75rem; }
+
+.pend-avatar {
+  width: 42px;
+  height: 42px;
+  background: var(--red);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.pend-name { font-weight: 700; font-size: 0.95rem; }
+.pend-meta { font-size: 0.8rem; color: var(--gray-400); display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.1rem; }
+
+.pendente-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+
+.pendente-periods { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.pend-period {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.75rem;
+  background: var(--gray-50);
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+}
+
+.pend-days {
+  margin-left: auto;
+  background: var(--gray-200);
+  padding: 0.1rem 0.45rem;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gray-600);
+}
+
+.pend-total {
+  font-size: 0.82rem;
+  color: var(--gray-500);
+  text-align: right;
+  padding: 0.25rem 0.75rem;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-box { width: 100%; max-width: 450px; }
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.modal-header h3 { font-size: 1rem; font-weight: 700; }
+
+.modal-actions { display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1rem; }
+
+.loading-center { display: flex; align-items: center; justify-content: center; height: 60vh; }
