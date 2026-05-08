@@ -1,7 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
-import { feriasApi, getStatusLabel, getStatusBadgeClass, formatDateOnly } from '../api'
+import { feriasApi, getStatusLabel, getStatusBadgeClass, formatDateOnly, STATUS } from '../api'
 import './MinhasFerias.css'
+
+function calcDays(inicio, fim) {
+  if (!inicio || !fim) return 0
+  const a = new Date(inicio)
+  const b = new Date(fim)
+  return Math.round((b - a) / 86400000) + 1
+}
 
 export default function MinhasFerias() {
   const { user } = useAuth()
@@ -39,10 +46,6 @@ export default function MinhasFerias() {
     }
   }
 
-  const pendentes = ferias.filter(f => f.status === 0)
-  const aprovadas = ferias.filter(f => f.status === 1)
-  const outras = ferias.filter(f => f.status === 2 || f.status === 3)
-
   return (
     <div>
       <div className="flex justify-between items-center" style={{ marginBottom: '1.5rem' }}>
@@ -73,9 +76,11 @@ export default function MinhasFerias() {
               <div className="ferias-card-header">
                 <div className="ferias-status-row">
                   <span className={`badge ${getStatusBadgeClass(f.status)}`}>{getStatusLabel(f.status)}</span>
+                  {f.adiantFerias && <span className="badge badge-info">Adiant. Férias</span>}
+                  {f.adiant13    && <span className="badge badge-info">Adiant. 13°</span>}
                   <span className="ferias-date">Solicitado em {new Date(f.createdAt).toLocaleDateString('pt-BR')}</span>
                 </div>
-                {f.status === 0 && (
+                {f.status === STATUS.PENDENTE && (
                   <button
                     className="btn btn-danger btn-sm"
                     onClick={() => handleCancel(f)}
@@ -87,22 +92,39 @@ export default function MinhasFerias() {
               </div>
 
               <div className="ferias-periods">
-                {f.periodos?.map((p, i) => (
-                  <div key={i} className="period-item">
-                    <span className="period-icon">📅</span>
-                    <span className="period-range">
-                      {formatDateOnly(p.inicio)} <strong>→</strong> {formatDateOnly(p.fim)}
-                    </span>
-                    <span className="period-days">
-                      {calcDays(p.inicio, p.fim)} dias
-                    </span>
-                  </div>
-                ))}
+                {f.periodos?.map((p, i) => {
+                  const dias = calcDays(p.inicio, p.fim)
+                  return (
+                    <div key={i} className="period-item">
+                      <span className="period-icon">📅</span>
+                      <span className="period-range">
+                        Período {i + 1}: {formatDateOnly(p.inicio)} <strong>→</strong> {formatDateOnly(p.fim)}
+                      </span>
+                      <span className="period-days">{dias} dias</span>
+                    </div>
+                  )
+                })}
+                <div className="period-item" style={{ fontWeight: 600, fontSize: '0.85rem', color: 'var(--gray-600)' }}>
+                  Total: {f.periodos?.reduce((s, p) => s + calcDays(p.inicio, p.fim), 0)} dias corridos
+                </div>
               </div>
+
+              {f.motivoNegacao && (
+                <div className="alert alert-error" style={{ marginTop: '0.75rem', marginBottom: 0, fontSize: '0.875rem' }}>
+                  <strong>Motivo da reprovação:</strong> {f.motivoNegacao}
+                </div>
+              )}
 
               {f.avisos?.length > 0 && (
                 <div className="alert alert-warning" style={{ marginTop: '0.75rem', marginBottom: 0 }}>
                   <strong>Avisos:</strong> {f.avisos.join(' | ')}
+                </div>
+              )}
+
+              {/* Explicação do fluxo */}
+              {f.status === STATUS.APROVADA_CHEFIA && (
+                <div className="alert alert-info" style={{ marginTop: '0.75rem', marginBottom: 0, fontSize: '0.85rem' }}>
+                  ✅ Aprovada pela chefia — aguardando aprovação final do administrador.
                 </div>
               )}
             </div>
@@ -111,11 +133,4 @@ export default function MinhasFerias() {
       )}
     </div>
   )
-}
-
-function calcDays(inicio, fim) {
-  if (!inicio || !fim) return 0
-  const a = new Date(inicio)
-  const b = new Date(fim)
-  return Math.round((b - a) / 86400000) + 1
 }

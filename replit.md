@@ -4,7 +4,7 @@ Frontend React + Backend .NET 8 para gestão de férias de equipes de saúde.
 
 ## Arquitetura
 
-- **Backend**: .NET 8 API REST + PostgreSQL (Supabase) + JWT — porta 8080
+- **Backend**: .NET 8 API REST + PostgreSQL (Replit built-in) + JWT — porta 8080
 - **Frontend**: React + Vite (proxy `/api` → backend) — porta 5000
 
 ## Workflows
@@ -12,33 +12,48 @@ Frontend React + Backend .NET 8 para gestão de férias de equipes de saúde.
 - `Backend API` — roda o .NET 8 API na porta 8080
 - `Start application` — roda o frontend Vite na porta 5000
 
+## Banco de Dados
+
+PostgreSQL do Replit (helium). Auto-migrate ativado no startup do backend.
+
 ## Usuários fictícios
 
-Crie os usuários clicando em "Criar usuários demo" na tela de login:
+Clique em **"Criar usuários demo"** na tela de login. As matrículas abaixo são do banco atual:
 
-| Nome | Cargo | Setor | Senha |
-|------|-------|-------|-------|
-| João Silva | Gestor | Enfermagem | Ferias@2026 |
-| Maria Santos | Colaborador | Enfermagem | Ferias@2026 |
-| Carlos Oliveira | Colaborador | Radiologia | Ferias@2026 |
-| Ana Costa | Gestor | Radiologia | Ferias@2026 |
-| Pedro Souza | Colaborador | Sem Setor | Ferias@2026 |
+| Matrícula | Nome | Cargo | Setor | Senha |
+|-----------|------|-------|-------|-------|
+| 0001 | Admin Hospital | Admin | — | Ferias@2026 |
+| 0002 | Pedro Souza | Funcionário | Sem Setor | Ferias@2026 |
+| 0003 | João Silva | Chefia | Enfermagem | Ferias@2026 |
+| 0004 | Ana Costa | Chefia | Radiologia | Ferias@2026 |
+| 0005 | Maria Santos | Funcionário | Enfermagem | Ferias@2026 |
+| 0006 | Carlos Oliveira | Funcionário | Radiologia | Ferias@2026 |
+| 0007 | Pedro Souza | Funcionário | Sem Setor | Ferias@2026 |
 
-Após criar, veja a matrícula gerada em **Usuários** (após login como Gestor).
+## Funcionalidades (spec v4)
 
-## Funcionalidades
+### Funcionário
+- Dashboard com resumo de férias e status do fluxo
+- Solicitar férias (até 3 períodos, total ≤ 30 dias, mínimo 30 dias de antecedência)
+- Adiantamento de férias e adiantamento de 13°
+- Ver histórico de solicitações com status detalhado
+- Cancelar solicitações pendentes
+- Calendário de ocupação do setor
 
-### Colaborador
-- Dashboard com resumo de férias
-- Solicitar férias (1 ou mais períodos = 30 dias)
-- Ver histórico / cancelar pendentes
-- Calendário do setor
+### Chefia (tudo acima +)
+- Respostas (1ª etapa): aprovar/reprovar solicitações Pendentes do setor
+- Gerenciar usuários do setor
 
-### Gestor (tudo acima +)
-- Aprovar/negar solicitações pendentes do setor
-- Gerenciar usuários (editar cargo, setor, senha)
-- Gerenciar setores (criar, ajustar limite simultâneo)
-- Calendário com visualização completa
+### Admin (tudo acima +)
+- Respostas Admin (2ª etapa): aprovar/reprovar solicitações já aprovadas pela chefia
+- Gerenciar todos os setores (criar, ajustar limite simultâneo)
+- Dashboard de adiantamentos solicitados
+
+## Fluxo de aprovação
+
+`Pendente` → (Chefia aprova) → `AprovadaChefia` → (Admin aprova) → `AprovadaAdmin`
+                            ↓ (Chefia reprova) → `ReprovadaChefia`
+                                               ↓ (Admin reprova) → `ReprovadaAdmin`
 
 ## User preferences
 

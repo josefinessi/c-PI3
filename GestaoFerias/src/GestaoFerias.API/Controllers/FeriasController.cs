@@ -16,7 +16,6 @@ public class FeriasController : ControllerBase
         _service = service;
     }
 
-    // simplão: matricula vem do body/route — depois você troca pra vir do JWT claim
     [Authorize]
     [HttpPost("solicitar/{matricula}")]
     public async Task<IActionResult> Solicitar(string matricula, [FromBody] SolicitarFeriasRequest request)
@@ -27,24 +26,51 @@ public class FeriasController : ControllerBase
     public async Task<IActionResult> Minhas(string matricula)
         => Ok(await _service.Minhas(matricula));
 
+    // Para chefia: pedidos Pendente do setor
     [Authorize]
     [HttpGet("pendentes/setor/{setorId:guid}")]
     public async Task<IActionResult> PendentesPorSetor(Guid setorId)
         => Ok(await _service.PendentesPorSetor(setorId));
 
+    // Para admin: pedidos AprovadaChefia aguardando aprovação final
     [Authorize]
-    [HttpPost("{feriasId:guid}/aprovar")]
-    public async Task<IActionResult> Aprovar(Guid feriasId, [FromBody] AprovarFeriasRequest request)
+    [HttpGet("aguardando-admin")]
+    public async Task<IActionResult> AguardandoAdmin()
+        => Ok(await _service.AguardandoAdmin());
+
+    // Chefia aprova (Pendente → AprovadaChefia)
+    [Authorize(Roles = "Chefia,Admin")]
+    [HttpPost("{feriasId:guid}/aprovar-chefia")]
+    public async Task<IActionResult> AprovarChefia(Guid feriasId, [FromBody] AprovarFeriasRequest request)
     {
-        await _service.Aprovar(feriasId, request);
+        await _service.AprovarChefia(feriasId, request);
         return NoContent();
     }
 
-    [Authorize]
-    [HttpPost("{feriasId:guid}/negar")]
-    public async Task<IActionResult> Negar(Guid feriasId, [FromBody] NegarFeriasRequest request)
+    // Admin aprova (AprovadaChefia → AprovadaAdmin)
+    [Authorize(Roles = "Admin")]
+    [HttpPost("{feriasId:guid}/aprovar-admin")]
+    public async Task<IActionResult> AprovarAdmin(Guid feriasId, [FromBody] AprovarFeriasRequest request)
     {
-        await _service.Negar(feriasId, request);
+        await _service.AprovarAdmin(feriasId, request);
+        return NoContent();
+    }
+
+    // Chefia reprova (Pendente → ReprovadaChefia)
+    [Authorize(Roles = "Chefia,Admin")]
+    [HttpPost("{feriasId:guid}/negar-chefia")]
+    public async Task<IActionResult> NegarChefia(Guid feriasId, [FromBody] NegarFeriasRequest request)
+    {
+        await _service.NegarChefia(feriasId, request);
+        return NoContent();
+    }
+
+    // Admin reprova (AprovadaChefia → ReprovadaAdmin)
+    [Authorize(Roles = "Admin")]
+    [HttpPost("{feriasId:guid}/negar-admin")]
+    public async Task<IActionResult> NegarAdmin(Guid feriasId, [FromBody] NegarFeriasRequest request)
+    {
+        await _service.NegarAdmin(feriasId, request);
         return NoContent();
     }
 
@@ -57,19 +83,24 @@ public class FeriasController : ControllerBase
     }
 
     [Authorize]
-    [Authorize]
-[HttpGet("calendario/setor/{setorId:guid}")]
-public async Task<IActionResult> Calendario(
-    Guid setorId,
-    [FromQuery] DateOnly? inicio,
-    [FromQuery] DateOnly? fim)
-{
-    var start = inicio ?? DateOnly.FromDateTime(DateTime.UtcNow);
-    var end = fim ?? start.AddDays(09); // ou 30, 90… você decide
+    [HttpGet("calendario/setor/{setorId:guid}")]
+    public async Task<IActionResult> Calendario(
+        Guid setorId,
+        [FromQuery] DateOnly? inicio,
+        [FromQuery] DateOnly? fim)
+    {
+        var start = inicio ?? DateOnly.FromDateTime(DateTime.UtcNow);
+        var end = fim ?? start.AddDays(90);
 
-    if (end < start)
-        return BadRequest("Intervalo inválido: fim deve ser maior ou igual ao início.");
+        if (end < start)
+            return BadRequest("Intervalo inválido: fim deve ser maior ou igual ao início.");
 
-    return Ok(await _service.Calendario(setorId, start, end));
-}
+        return Ok(await _service.Calendario(setorId, start, end));
+    }
+
+    // Dashboard admin: lista adiantamentos solicitados
+    [Authorize(Roles = "Admin")]
+    [HttpGet("adiantamentos")]
+    public async Task<IActionResult> Adiantamentos()
+        => Ok(await _service.ListaAdiantamentos());
 }

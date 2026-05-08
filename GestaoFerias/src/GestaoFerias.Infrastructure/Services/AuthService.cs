@@ -20,73 +20,79 @@ public class AuthService : IAuthService
         _tokenService = tokenService;
     }
 
-private async Task<string> GerarMatriculaAsync()
-{
-    var matriculas = await _context.Usuarios
-        .AsNoTracking()
-        .Select(u => u.Matricula)
-        .ToListAsync();
-
-    var max = matriculas
-        .Select(m => int.TryParse(m, out var n) ? n : 0)
-        .DefaultIfEmpty(0)
-        .Max();
-
-    var nova = max + 1;
-
-    if (nova > 9999)
-        throw new InvalidOperationException("Limite de matrículas atingido.");
-
-    return nova.ToString("D4");
-}
-
-public async Task<(string Matricula, string Token)> Register(RegisterRequest request)
-{
-    // 1) resolve SetorId por nome (ou usa "Sem Setor")
-    var defaultSetorId = new Guid("11111111-1111-1111-1111-111111111111");
-
-    Guid setorId = defaultSetorId;
-
-    if (!string.IsNullOrWhiteSpace(request.SetorNome))
+    private async Task<string> GerarMatriculaAsync()
     {
-        var setor = await _context.Setores
+        var matriculas = await _context.Usuarios
             .AsNoTracking()
-            .FirstOrDefaultAsync(s => s.Nome.ToLower() == request.SetorNome.ToLower());
+            .Select(u => u.Matricula)
+            .ToListAsync();
 
-        if (setor == null)
-            throw new Exception($"Setor '{request.SetorNome}' não encontrado.");
+        var max = matriculas
+            .Select(m => int.TryParse(m, out var n) ? n : 0)
+            .DefaultIfEmpty(0)
+            .Max();
 
-        setorId = setor.Id;
+        var nova = max + 1;
+
+        if (nova > 9999999)
+            throw new InvalidOperationException("Limite de matrículas atingido.");
+
+        return nova.ToString("D4");
     }
 
-    // 2) gera matrícula
-    var matricula = await GerarMatriculaAsync();
-
-    // 3) cria usuário
-    var usuario = new Usuario
+    private static UserRole ParseRole(string role) => role.ToLower() switch
     {
-        Id = Guid.NewGuid(),
-        Matricula = matricula,
-        Nome = request.Nome,
-        PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Senha),
-        Role = Enum.Parse<UserRole>(request.Role, true),
-        SetorId = setorId
+        "admin"        => UserRole.Admin,
+        "chefia"       => UserRole.Chefia,
+        "gestor"       => UserRole.Chefia,       // backward compat
+        "funcionario"  => UserRole.Funcionario,
+        "colaborador"  => UserRole.Funcionario,   // backward compat
+        _ => throw new Exception($"Cargo inválido: '{role}'. Use Admin, Chefia ou Funcionario.")
     };
 
-    try
+    public async Task<(string Matricula, string Token)> Register(RegisterRequest request)
     {
-        _context.Usuarios.Add(usuario);
-        await _context.SaveChangesAsync();
-    }
-    catch (DbUpdateException ex) when (ex.InnerException is PostgresException pg && pg.SqlState == "23505")
-    {
-        // 23505 = unique violation (matricula duplicada, etc.)
-        throw new Exception("Conflito ao salvar usuário (dados duplicados). Tente novamente.");
-    }
+        var defaultSetorId = new Guid("11111111-1111-1111-1111-111111111111");
 
-    var token = _tokenService.GenerateToken(usuario);
-    return (usuario.Matricula, token);
-}
+        Guid setorId = defaultSetorId;
+
+        if (!string.IsNullOrWhiteSpace(request.SetorNome))
+        {
+            var setor = await _context.Setores
+                .AsNoTracking()
+                .FirstOrDefaultAsync(s => s.Nome.ToLower() == request.SetorNome.ToLower());
+
+            if (setor == null)
+                throw new Exception($"Setor '{request.SetorNome}' não encontrado.");
+
+            setorId = setor.Id;
+        }
+
+        var matricula = await GerarMatriculaAsync();
+
+        var usuario = new Usuario
+        {
+            Id = Guid.NewGuid(),
+            Matricula = matricula,
+            Nome = request.Nome,
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Senha),
+            Role = ParseRole(request.Role),
+            SetorId = setorId
+        };
+
+        try
+        {
+            _context.Usuarios.Add(usuario);
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateException ex) when (ex.InnerException is PostgresException pg && pg.SqlState == "23505")
+        {
+            throw new Exception("Conflito ao salvar usuário (dados duplicados). Tente novamente.");
+        }
+
+        var token = _tokenService.GenerateToken(usuario);
+        return (usuario.Matricula, token);
+    }
 
     public async Task<string> Login(LoginRequest request)
     {
@@ -94,32 +100,8 @@ public async Task<(string Matricula, string Token)> Register(RegisterRequest req
             .FirstOrDefaultAsync(u => u.Matricula == request.Matricula);
 
         if (usuario == null || !BCrypt.Net.BCrypt.Verify(request.Senha, usuario.PasswordHash))
-            throw new Exception("Credenciais inválidas.");
+            throw new Exception("Dados incorretos. Tente novamente.");
 
         return _tokenService.GenerateToken(usuario);
     }
-//     private async Task<Guid> ResolverSetorIdAsync(RegisterRequest request)
-// {
-//     // 1) Preferir SetorId se veio
-//     if (request.SetorId.HasValue && request.SetorId.Value != Guid.Empty)
-//         return request.SetorId.Value;
-
-//     // 2) Se vier SetorNome, buscar no banco
-//     if (!string.IsNullOrWhiteSpace(request.SetorNome))
-//     {
-//         var nome = request.SetorNome.Trim();
-
-//         var setor = await _context.Setores
-//             .AsNoTracking()
-//             .FirstOrDefaultAsync(s => s.Nome.ToLower() == nome.ToLower());
-
-//         if (setor is null)
-//             throw new Exception($"Setor '{nome}' não encontrado.");
-
-//         return setor.Id;
-//     }
-
-//     // 3) Fallback: Sem Setor
-//     return new Guid("11111111-1111-1111-1111-111111111111");
-// }
 }

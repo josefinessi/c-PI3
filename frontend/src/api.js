@@ -44,18 +44,40 @@ export const setoresApi = {
 }
 
 export const feriasApi = {
-  solicitar: (matricula, periodos) => api.post(`/Ferias/solicitar/${matricula}`, { periodos }),
+  solicitar: (matricula, periodos, adiantFerias = false, adiant13 = false) =>
+    api.post(`/Ferias/solicitar/${matricula}`, { periodos, adiantFerias, adiant13 }),
   minhas: (matricula) => api.get(`/Ferias/minhas/${matricula}`),
+
+  // Chefia: pedidos Pendente do setor
   pendentesPorSetor: (setorId) => api.get(`/Ferias/pendentes/setor/${setorId}`),
-  aprovar: (feriasId, aprovadoPorId) => api.post(`/Ferias/${feriasId}/aprovar`, { aprovadoPorId }),
-  negar: (feriasId, negadoPorId, motivo) => api.post(`/Ferias/${feriasId}/negar`, { negadoPorId, motivo }),
-  cancelar: (feriasId, matricula) => api.delete(`/Ferias/${feriasId}/cancelar/${matricula}`),
+
+  // Admin: pedidos AprovadaChefia aguardando aprovação final
+  aguardandoAdmin: () => api.get(`/Ferias/aguardando-admin`),
+
+  // Aprovações em duas etapas
+  aprovarChefia: (feriasId, aprovadoPorId) =>
+    api.post(`/Ferias/${feriasId}/aprovar-chefia`, { aprovadoPorId }),
+  aprovarAdmin: (feriasId, aprovadoPorId) =>
+    api.post(`/Ferias/${feriasId}/aprovar-admin`, { aprovadoPorId }),
+
+  // Reprovações
+  negarChefia: (feriasId, negadoPorId, motivo) =>
+    api.post(`/Ferias/${feriasId}/negar-chefia`, { negadoPorId, motivo }),
+  negarAdmin: (feriasId, negadoPorId, motivo) =>
+    api.post(`/Ferias/${feriasId}/negar-admin`, { negadoPorId, motivo }),
+
+  cancelar: (feriasId, matricula) =>
+    api.delete(`/Ferias/${feriasId}/cancelar/${matricula}`),
+
   calendario: (setorId, inicio, fim) => {
     const params = {}
     if (inicio) params.inicio = inicio
     if (fim) params.fim = fim
     return api.get(`/Ferias/calendario/setor/${setorId}`, { params })
-  }
+  },
+
+  // Admin dashboard
+  adiantamentos: () => api.get(`/Ferias/adiantamentos`),
 }
 
 export function parseJwt(token) {
@@ -67,13 +89,37 @@ export function parseJwt(token) {
   }
 }
 
+// Status numéricos conforme spec v4
+export const STATUS = {
+  PENDENTE: 0,
+  APROVADA_CHEFIA: 1,
+  APROVADA_ADMIN: 2,
+  REPROVADA_CHEFIA: 3,
+  REPROVADA_ADMIN: 4,
+  CANCELADA: 5,
+}
+
 export function getStatusLabel(status) {
-  const map = { 0: 'Pendente', 1: 'Aprovada', 2: 'Negada', 3: 'Cancelada' }
+  const map = {
+    0: 'Pendente',
+    1: 'Aprovada pela Chefia',
+    2: 'Aprovada',
+    3: 'Reprovada pela Chefia',
+    4: 'Reprovada pelo Admin',
+    5: 'Cancelada',
+  }
   return map[status] ?? 'Desconhecido'
 }
 
 export function getStatusBadgeClass(status) {
-  const map = { 0: 'badge-pending', 1: 'badge-approved', 2: 'badge-denied', 3: 'badge-cancelled' }
+  const map = {
+    0: 'badge-pending',
+    1: 'badge-chefia',
+    2: 'badge-approved',
+    3: 'badge-denied',
+    4: 'badge-denied',
+    5: 'badge-cancelled',
+  }
   return map[status] ?? ''
 }
 

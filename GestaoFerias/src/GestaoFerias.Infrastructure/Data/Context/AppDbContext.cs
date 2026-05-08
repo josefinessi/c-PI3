@@ -52,6 +52,13 @@ public class AppDbContext : DbContext
                   .HasForeignKey(f => f.SetorId)
                   .IsRequired();
 
+            // Aprovação chefia (1ª etapa)
+            entity.HasOne(f => f.AprovadoChefiaPor)
+                  .WithMany()
+                  .HasForeignKey(f => f.AprovadoChefiaPorId)
+                  .OnDelete(DeleteBehavior.Restrict);
+
+            // Aprovação admin (2ª etapa — estado final)
             entity.HasOne(f => f.AprovadoPor)
                   .WithMany()
                   .HasForeignKey(f => f.AprovadoPorId)
@@ -59,6 +66,8 @@ public class AppDbContext : DbContext
 
             entity.Property(f => f.Status).IsRequired();
             entity.Property(f => f.CreatedAt).IsRequired();
+            entity.Property(f => f.AdiantFerias).HasDefaultValue(false).IsRequired();
+            entity.Property(f => f.Adiant13).HasDefaultValue(false).IsRequired();
 
             entity.HasMany(f => f.Periodos)
                   .WithOne(p => p.Ferias)
@@ -71,8 +80,6 @@ public class AppDbContext : DbContext
             entity.HasKey(p => p.Id);
             entity.Property(p => p.Inicio).IsRequired();
             entity.Property(p => p.Fim).IsRequired();
-
-            // índice útil p/ calendário e conflitos
             entity.HasIndex(p => new { p.Inicio, p.Fim });
         });
     }

@@ -2,8 +2,8 @@ import { Navigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Layout from './Layout'
 
-export default function PrivateRoute({ children, gestorOnly = false }) {
-  const { user, loading } = useAuth()
+export default function PrivateRoute({ children, chefiaOuAdmin = false, adminOnly = false }) {
+  const { user, loading, isChefia, isAdmin } = useAuth()
 
   if (loading) {
     return (
@@ -14,7 +14,8 @@ export default function PrivateRoute({ children, gestorOnly = false }) {
   }
 
   if (!user) return <Navigate to="/login" replace />
-  if (gestorOnly && user.role !== 'Gestor') return <Navigate to="/dashboard" replace />
+  if (chefiaOuAdmin && !isChefia && !isAdmin) return <Navigate to="/dashboard" replace />
+  if (adminOnly && !isAdmin) return <Navigate to="/dashboard" replace />
 
   return <Layout>{children}</Layout>
 }

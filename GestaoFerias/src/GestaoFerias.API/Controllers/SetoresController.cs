@@ -18,7 +18,7 @@ public class SetoresController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Gestor")]
+    [Authorize(Roles = "Admin,Chefia")]
     public async Task<IActionResult> Create(CreateSetorRequest request)
         => Ok(await _service.Create(request));
 
@@ -30,13 +30,12 @@ public class SetoresController : ControllerBase
     public async Task<IActionResult> GetById(Guid id)
         => Ok(await _service.GetById(id));
 
-    // /api/setores/buscar?nome=radio
     [HttpGet("buscar")]
     public async Task<IActionResult> Buscar([FromQuery] string nome)
         => Ok(await _service.SearchByNome(nome));
 
     [HttpPut("{id:guid}")]
-    [Authorize(Roles = "Gestor")]
+    [Authorize(Roles = "Admin,Chefia")]
     public async Task<IActionResult> Update(Guid id, UpdateSetorRequest request)
     {
         await _service.Update(id, request);
@@ -44,13 +43,14 @@ public class SetoresController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
-    [Authorize(Roles = "Gestor")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(Guid id)
     {
         await _service.Delete(id);
         return NoContent();
     }
-    [Authorize(Roles = "Gestor")]
+
+    [Authorize(Roles = "Admin,Chefia")]
     [HttpPatch("{id:guid}/limite-ferias")]
     public async Task<IActionResult> UpdateLimiteFerias(Guid id, [FromBody] UpdateLimiteFeriasRequest request)
     {

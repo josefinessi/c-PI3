@@ -4,17 +4,31 @@ import { useAuth } from '../context/AuthContext'
 import './Layout.css'
 
 const navItems = [
-  { path: '/dashboard', label: 'Dashboard', icon: '⊞', roles: ['Gestor', 'Colaborador'] },
-  { path: '/minhas-ferias', label: 'Minhas Férias', icon: '🏖', roles: ['Gestor', 'Colaborador'] },
-  { path: '/solicitar', label: 'Solicitar Férias', icon: '➕', roles: ['Gestor', 'Colaborador'] },
-  { path: '/pendentes', label: 'Pendentes do Setor', icon: '⏳', roles: ['Gestor'] },
-  { path: '/calendario', label: 'Calendário', icon: '📅', roles: ['Gestor', 'Colaborador'] },
-  { path: '/usuarios', label: 'Usuários', icon: '👥', roles: ['Gestor'] },
-  { path: '/setores', label: 'Setores', icon: '🏢', roles: ['Gestor'] },
+  { path: '/dashboard',         label: 'Dashboard',         icon: '⊞', roles: ['Funcionario','Colaborador','Chefia','Gestor','Admin'] },
+  { path: '/minhas-ferias',     label: 'Minhas Férias',     icon: '🏖', roles: ['Funcionario','Colaborador','Chefia','Gestor','Admin'] },
+  { path: '/solicitar',         label: 'Solicitar Férias',  icon: '➕', roles: ['Funcionario','Colaborador','Chefia','Gestor','Admin'] },
+  { path: '/pendentes',         label: 'Respostas (Chefia)',icon: '⏳', roles: ['Chefia','Gestor'] },
+  { path: '/aprovar-admin',     label: 'Respostas (Admin)', icon: '✅', roles: ['Admin'] },
+  { path: '/calendario',        label: 'Calendário',        icon: '📅', roles: ['Funcionario','Colaborador','Chefia','Gestor','Admin'] },
+  { path: '/usuarios',          label: 'Usuários',          icon: '👥', roles: ['Chefia','Gestor','Admin'] },
+  { path: '/setores',           label: 'Setores',           icon: '🏢', roles: ['Admin'] },
+  { path: '/adiantamentos',     label: 'Adiantamentos',     icon: '💰', roles: ['Admin'] },
 ]
 
+function getRoleBadgeClass(role) {
+  if (role === 'Admin') return 'badge-admin'
+  if (role === 'Chefia' || role === 'Gestor') return 'badge-gestor'
+  return 'badge-colaborador'
+}
+
+function getRoleLabel(role) {
+  if (role === 'Admin') return 'Admin'
+  if (role === 'Chefia' || role === 'Gestor') return 'Chefia'
+  return 'Funcionário'
+}
+
 export default function Layout({ children }) {
-  const { user, logout, isGestor } = useAuth()
+  const { user, logout } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -24,8 +38,7 @@ export default function Layout({ children }) {
     navigate('/login')
   }
 
-  const role = user?.role ?? 'Colaborador'
-
+  const role = user?.role ?? 'Funcionario'
   const filtered = navItems.filter(item => item.roles.includes(role))
 
   return (
@@ -46,8 +59,8 @@ export default function Layout({ children }) {
           <div>
             <div className="user-name">{user?.nome ?? 'Usuário'}</div>
             <div className="user-meta">
-              <span className={`badge ${role === 'Gestor' ? 'badge-gestor' : 'badge-colaborador'}`}>
-                {role}
+              <span className={`badge ${getRoleBadgeClass(role)}`}>
+                {getRoleLabel(role)}
               </span>
               <span className="user-matricula">#{user?.matricula}</span>
             </div>

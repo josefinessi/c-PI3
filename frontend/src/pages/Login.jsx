@@ -5,14 +5,15 @@ import { useAuth } from '../context/AuthContext'
 import './Login.css'
 
 const DEMO_USERS = [
-  { nome: 'João Silva', senha: 'Ferias@2026', role: 'Gestor', setorNome: 'Enfermagem' },
-  { nome: 'Maria Santos', senha: 'Ferias@2026', role: 'Colaborador', setorNome: 'Enfermagem' },
-  { nome: 'Carlos Oliveira', senha: 'Ferias@2026', role: 'Colaborador', setorNome: 'Radiologia' },
-  { nome: 'Ana Costa', senha: 'Ferias@2026', role: 'Gestor', setorNome: 'Radiologia' },
-  { nome: 'Pedro Souza', senha: 'Ferias@2026', role: 'Colaborador', setorNome: '' },
+  { nome: 'Admin Hospital',   senha: 'Ferias@2026', role: 'Admin',      setorNome: '' },
+  { nome: 'João Silva',       senha: 'Ferias@2026', role: 'Chefia',     setorNome: 'Enfermagem' },
+  { nome: 'Ana Costa',        senha: 'Ferias@2026', role: 'Chefia',     setorNome: 'Radiologia' },
+  { nome: 'Maria Santos',     senha: 'Ferias@2026', role: 'Funcionario',setorNome: 'Enfermagem' },
+  { nome: 'Carlos Oliveira',  senha: 'Ferias@2026', role: 'Funcionario',setorNome: 'Radiologia' },
+  { nome: 'Pedro Souza',      senha: 'Ferias@2026', role: 'Funcionario',setorNome: '' },
 ]
 
-const DEMO_SETORES = ['Enfermagem', 'Radiologia', 'UTI', 'Pediatria']
+const DEMO_SETORES = ['Enfermagem', 'Radiologia', 'UTI', 'Pediatria', 'Laboratorio']
 
 export default function Login() {
   const navigate = useNavigate()
@@ -35,7 +36,7 @@ export default function Login() {
       const token = res.data.token
       const claims = parseJwt(token)
       const role = claims?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
-        ?? claims?.role ?? claims?.Role ?? 'Colaborador'
+        ?? claims?.role ?? claims?.Role ?? 'Funcionario'
       const mat = claims?.Matricula ?? claims?.matricula ?? matricula
 
       let userData = { nome: 'Usuário', matricula: mat, role, setorId: null, setorNome: '', id: null }
@@ -49,12 +50,12 @@ export default function Login() {
           setorNome: uRes.data.setorNome,
           id: uRes.data.id,
         }
-      } catch { /* use claims */ }
+      } catch { /* usa claims */ }
 
       login(token, userData)
       navigate('/dashboard')
     } catch (err) {
-      setError(err.response?.data?.message ?? err.response?.data ?? 'Matrícula ou senha incorretos.')
+      setError(err.response?.data?.message ?? err.response?.data ?? 'Dados incorretos. Tente novamente.')
     } finally {
       setLoading(false)
     }
@@ -65,17 +66,16 @@ export default function Login() {
     setSeedMsg('')
     setSeedError('')
     let created = 0
-    let errs = []
+    const errs = []
 
     for (const setor of DEMO_SETORES) {
       try {
-        const token = localStorage.getItem('token')
         await fetch('/api/setores', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ nome: setor })
         })
-      } catch { /* ignore - may already exist */ }
+      } catch { /* ignora se já existe */ }
     }
 
     for (const u of DEMO_USERS) {
@@ -94,12 +94,8 @@ export default function Login() {
       }
     }
 
-    if (created > 0) {
-      setSeedMsg(`${created} usuário(s) criado(s) com sucesso!`)
-    }
-    if (errs.length > 0) {
-      setSeedError(errs.join(' | '))
-    }
+    if (created > 0) setSeedMsg(`${created} usuário(s) criado(s) com sucesso!`)
+    if (errs.length > 0) setSeedError(errs.join(' | '))
     setSeeding(false)
   }
 
@@ -112,18 +108,10 @@ export default function Login() {
           <p>Sistema de gestão de férias para equipes de saúde</p>
         </div>
         <div className="login-features">
-          <div className="feature-item">
-            <span>✔</span> Solicitação e aprovação de férias
-          </div>
-          <div className="feature-item">
-            <span>✔</span> Controle de limite por setor
-          </div>
-          <div className="feature-item">
-            <span>✔</span> Calendário de ocupação
-          </div>
-          <div className="feature-item">
-            <span>✔</span> Gestão de usuários e setores
-          </div>
+          <div className="feature-item"><span>✔</span> Solicitação com até 3 períodos</div>
+          <div className="feature-item"><span>✔</span> Aprovação em duas etapas (Chefia → Admin)</div>
+          <div className="feature-item"><span>✔</span> Adiantamento de férias e 13°</div>
+          <div className="feature-item"><span>✔</span> Calendário de ocupação por setor</div>
         </div>
       </div>
 
@@ -168,27 +156,25 @@ export default function Login() {
             <div className="demo-title">Usuários de demonstração</div>
             <div className="demo-users">
               <div className="demo-user-row header-row">
-                <span>Nome</span><span>Matrícula</span><span>Senha</span><span>Cargo</span>
+                <span>Nome</span><span>Cargo</span><span>Setor</span><span>Senha</span>
               </div>
-              <div className="demo-user-row">
-                <span>João Silva</span><span>ver abaixo</span><span>Ferias@2026</span>
-                <span className="badge badge-gestor">Gestor</span>
-              </div>
-              <div className="demo-user-row">
-                <span>Maria Santos</span><span>ver abaixo</span><span>Ferias@2026</span>
-                <span className="badge badge-colaborador">Colaborador</span>
-              </div>
-              <div className="demo-user-row">
-                <span>Carlos Oliveira</span><span>ver abaixo</span><span>Ferias@2026</span>
-                <span className="badge badge-colaborador">Colaborador</span>
-              </div>
-              <div className="demo-user-row">
-                <span>Ana Costa</span><span>ver abaixo</span><span>Ferias@2026</span>
-                <span className="badge badge-gestor">Gestor</span>
-              </div>
+              {[
+                { nome: 'Admin Hospital',  cargo: 'Admin',      setor: '—',          badge: 'badge-admin' },
+                { nome: 'João Silva',      cargo: 'Chefia',     setor: 'Enfermagem', badge: 'badge-gestor' },
+                { nome: 'Ana Costa',       cargo: 'Chefia',     setor: 'Radiologia', badge: 'badge-gestor' },
+                { nome: 'Maria Santos',    cargo: 'Funcionário',setor: 'Enfermagem', badge: 'badge-colaborador' },
+                { nome: 'Carlos Oliveira', cargo: 'Funcionário',setor: 'Radiologia', badge: 'badge-colaborador' },
+              ].map(u => (
+                <div key={u.nome} className="demo-user-row">
+                  <span>{u.nome}</span>
+                  <span className={`badge ${u.badge}`}>{u.cargo}</span>
+                  <span>{u.setor}</span>
+                  <span>Ferias@2026</span>
+                </div>
+              ))}
             </div>
             <p className="demo-note">
-              Primeiro, crie os usuários demo. Depois consulte a matrícula gerada em <strong>Usuários</strong> após login.
+              Clique em <strong>Criar usuários demo</strong>. Depois veja a matrícula gerada em <strong>Usuários</strong> (login como Admin ou Chefia).
             </p>
             {seedMsg && <div className="alert alert-success mt-2">{seedMsg}</div>}
             {seedError && <div className="alert alert-warning mt-2 demo-errs">{seedError}</div>}
@@ -198,7 +184,9 @@ export default function Login() {
               disabled={seeding}
               type="button"
             >
-              {seeding ? <><span className="spinner" style={{borderTopColor:'var(--red)', borderColor:'var(--red-light)'}} /> Criando...</> : '🚀 Criar usuários demo'}
+              {seeding
+                ? <><span className="spinner" style={{ borderTopColor: 'var(--red)', borderColor: 'var(--red-light)' }} /> Criando...</>
+                : '🚀 Criar usuários demo'}
             </button>
           </div>
         </div>

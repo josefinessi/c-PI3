@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestaoFerias.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7442e0ea1c7c68889b8cc9ea81da3ed66d8528d4")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestaoFerias.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestaoFerias.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

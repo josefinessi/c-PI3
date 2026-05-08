@@ -3,7 +3,9 @@ namespace GestaoFerias.Domain.Enums;
 public enum FeriasStatus
 {
     Pendente = 0,
-    Aprovada = 1,
-    Negada = 2,
-    Cancelada = 3
+    AprovadaChefia = 1,
+    AprovadaAdmin = 2,
+    ReprovadaChefia = 3,
+    ReprovadaAdmin = 4,
+    Cancelada = 5
 }

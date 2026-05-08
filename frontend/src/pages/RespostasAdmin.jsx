@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { feriasApi, formatDateOnly } from '../api'
-import './PendentesSetor.css'
 
 function calcDays(ini, fim) {
   if (!ini || !fim) return 0
@@ -9,9 +8,9 @@ function calcDays(ini, fim) {
   return Math.round((b - a) / 86400000) + 1
 }
 
-export default function PendentesSetor() {
+export default function RespostasAdmin() {
   const { user } = useAuth()
-  const [pendentes, setPendentes] = useState([])
+  const [lista, setLista] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [msg, setMsg] = useState('')
@@ -20,28 +19,27 @@ export default function PendentesSetor() {
   const [motivo, setMotivo] = useState('')
 
   async function load() {
-    if (!user.setorId) { setLoading(false); return }
     setLoading(true)
     try {
-      const res = await feriasApi.pendentesPorSetor(user.setorId)
-      setPendentes(res.data ?? [])
+      const res = await feriasApi.aguardandoAdmin()
+      setLista(res.data ?? [])
     } catch {
-      setError('Erro ao carregar pendências.')
+      setError('Erro ao carregar solicitações.')
     } finally {
       setLoading(false)
     }
   }
 
-  useEffect(() => { load() }, [user.setorId])
+  useEffect(() => { load() }, [])
 
   async function handleAprovar(f) {
-    if (!confirm(`Aprovar férias de ${f.nome}? O pedido seguirá para aprovação final do administrador.`)) return
+    if (!confirm(`Aprovar definitivamente as férias de ${f.nome}?`)) return
     setActing(f.id + '_aprovar')
     setError('')
     setMsg('')
     try {
-      await feriasApi.aprovarChefia(f.id, user.id)
-      setMsg(`Férias de ${f.nome} aprovadas pela chefia! Aguardando aprovação do admin.`)
+      await feriasApi.aprovarAdmin(f.id, user.id)
+      setMsg(`Férias de ${f.nome} aprovadas com sucesso! (aprovação final)`)
       load()
     } catch (e) {
       setError(e.response?.data?.message ?? e.response?.data ?? 'Erro ao aprovar.')
@@ -56,8 +54,8 @@ export default function PendentesSetor() {
     setError('')
     setMsg('')
     try {
-      await feriasApi.negarChefia(negarModal.id, user.id, motivo)
-      setMsg(`Solicitação de ${negarModal.nome} reprovada.`)
+      await feriasApi.negarAdmin(negarModal.id, user.id, motivo)
+      setMsg(`Solicitação de ${negarModal.nome} reprovada pelo admin.`)
       setNegarModal(null)
       setMotivo('')
       load()
@@ -71,32 +69,26 @@ export default function PendentesSetor() {
   return (
     <div>
       <div style={{ marginBottom: '1.5rem' }}>
-        <h1 className="page-title">Respostas — Chefia</h1>
-        <p className="page-subtitle">
-          {user.setorNome ? `Setor: ${user.setorNome}` : 'Você não está em um setor'} — Aprovação da 1ª etapa
-        </p>
+        <h1 className="page-title">Respostas — Admin</h1>
+        <p className="page-subtitle">Aprovação final (2ª etapa) — pedidos já aprovados pela chefia</p>
       </div>
 
       {error && <div className="alert alert-error">{error}</div>}
       {msg && <div className="alert alert-success">{msg}</div>}
 
-      {!user.setorId ? (
-        <div className="card" style={{ textAlign: 'center', padding: '2rem' }}>
-          <p>Você não está associado a nenhum setor.</p>
-        </div>
-      ) : loading ? (
+      {loading ? (
         <div className="loading-center">
           <div className="spinner" style={{ borderTopColor: 'var(--red)', borderColor: 'var(--gray-200)', width: '2rem', height: '2rem', borderWidth: '3px' }} />
         </div>
-      ) : pendentes.length === 0 ? (
+      ) : lista.length === 0 ? (
         <div className="card" style={{ textAlign: 'center', padding: '2.5rem' }}>
           <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>🎉</div>
-          <h3 style={{ fontWeight: 700, marginBottom: '0.5rem' }}>Nenhuma solicitação pendente</h3>
-          <p style={{ color: 'var(--gray-500)' }}>Todas as solicitações foram processadas.</p>
+          <h3 style={{ fontWeight: 700, marginBottom: '0.5rem' }}>Nenhuma solicitação aguardando</h3>
+          <p style={{ color: 'var(--gray-500)' }}>Todas as solicitações aprovadas pela chefia já foram processadas.</p>
         </div>
       ) : (
         <div className="pendentes-list">
-          {pendentes.map(f => (
+          {lista.map(f => (
             <div key={f.id} className="pendente-card card">
               <div className="pendente-header">
                 <div className="pendente-user">
@@ -105,12 +97,13 @@ export default function PendentesSetor() {
                     <div className="pend-name">{f.nome}</div>
                     <div className="pend-meta">
                       <span>Matrícula #{f.matricula}</span>
-                      {f.setorNome && <span>• {f.setorNome}</span>}
-                      <span>• Solicitado em {new Date(f.createdAt).toLocaleDateString('pt-BR')}</span>
+                      <span>• Setor: {f.setorNome}</span>
+                      <span>• Enviado em {new Date(f.createdAt).toLocaleDateString('pt-BR')}</span>
                     </div>
                     <div style={{ display: 'flex', gap: '0.4rem', marginTop: '0.35rem', flexWrap: 'wrap' }}>
+                      <span className="badge badge-chefia">Aprovado pela Chefia</span>
                       {f.adiantFerias && <span className="badge badge-info">Adiant. Férias</span>}
-                      {f.adiant13 && <span className="badge badge-info">Adiant. 13°</span>}
+                      {f.adiant13    && <span className="badge badge-info">Adiant. 13°</span>}
                     </div>
                   </div>
                 </div>
