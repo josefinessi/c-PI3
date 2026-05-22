@@ -29,3 +29,18 @@
 /home/runner/workspace/GestaoFerias/src/GestaoFerias.Application/obj/Debug/net8.0/refint/GestaoFerias.Application.dll
 /home/runner/workspace/GestaoFerias/src/GestaoFerias.Application/obj/Debug/net8.0/GestaoFerias.Application.pdb
 /home/runner/workspace/GestaoFerias/src/GestaoFerias.Application/obj/Debug/net8.0/ref/GestaoFerias.Application.dll
+C:\Users\jose8\OneDrive\Desktop\Projeto com Frontend\projeto\GestaoFerias\src\GestaoFerias.Application\bin\Debug\net8.0\GestaoFerias.Application.deps.json
+C:\Users\jose8\OneDrive\Desktop\Projeto com Frontend\projeto\GestaoFerias\src\GestaoFerias.Application\bin\Debug\net8.0\GestaoFerias.Application.dll
+C:\Users\jose8\OneDrive\Desktop\Projeto com Frontend\projeto\GestaoFerias\src\GestaoFerias.Application\bin\Debug\net8.0\GestaoFerias.Application.pdb
+C:\Users\jose8\OneDrive\Desktop\Projeto com Frontend\projeto\GestaoFerias\src\GestaoFerias.Application\bin\Debug\net8.0\GestaoFerias.Domain.dll
+C:\Users\jose8\OneDrive\Desktop\Projeto com Frontend\projeto\GestaoFerias\src\GestaoFerias.Application\bin\Debug\net8.0\GestaoFerias.Domain.pdb
+C:\Users\jose8\OneDrive\Desktop\Projeto com Frontend\projeto\GestaoFerias\src\GestaoFerias.Application\obj\Debug\net8.0\GestaoFerias.Application.csproj.AssemblyReference.cache
+C:\Users\jose8\OneDrive\Desktop\Projeto com Frontend\projeto\GestaoFerias\src\GestaoFerias.Application\obj\Debug\net8.0\GestaoFerias.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jose8\OneDrive\Desktop\Projeto com Frontend\projeto\GestaoFerias\src\GestaoFerias.Application\obj\Debug\net8.0\GestaoFerias.Application.AssemblyInfoInputs.cache
+C:\Users\jose8\OneDrive\Desktop\Projeto com Frontend\projeto\GestaoFerias\src\GestaoFerias.Application\obj\Debug\net8.0\GestaoFerias.Application.AssemblyInfo.cs
+C:\Users\jose8\OneDrive\Desktop\Projeto com Frontend\projeto\GestaoFerias\src\GestaoFerias.Application\obj\Debug\net8.0\GestaoFerias.Application.csproj.CoreCompileInputs.cache
+C:\Users\jose8\OneDrive\Desktop\Projeto com Frontend\projeto\GestaoFerias\src\GestaoFerias.Application\obj\Debug\net8.0\GestaoFe.0A63195A.Up2Date
+C:\Users\jose8\OneDrive\Desktop\Projeto com Frontend\projeto\GestaoFerias\src\GestaoFerias.Application\obj\Debug\net8.0\GestaoFerias.Application.dll
+C:\Users\jose8\OneDrive\Desktop\Projeto com Frontend\projeto\GestaoFerias\src\GestaoFerias.Application\obj\Debug\net8.0\refint\GestaoFerias.Application.dll
+C:\Users\jose8\OneDrive\Desktop\Projeto com Frontend\projeto\GestaoFerias\src\GestaoFerias.Application\obj\Debug\net8.0\GestaoFerias.Application.pdb
+C:\Users\jose8\OneDrive\Desktop\Projeto com Frontend\projeto\GestaoFerias\src\GestaoFerias.Application\obj\Debug\net8.0\ref\GestaoFerias.Application.dll

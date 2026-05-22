@@ -1,0 +1,230 @@
+
+> frontend@0.0.0 dev
+> vite
+
+[1G[0K
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J
+  [32m[1mVITE[22m v8.0.11[39m  [2mready in [0m[1m200[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5000[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://172.31.67.162:[1m5000[22m/[39m
+[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m4:54:47 AM[22m [36m[1m[vite][22m[39m [32mvite.config.js changed, restarting server...[39m
+[2m4:54:47 AM[22m [36m[1m[vite][22m[39m server restarted.
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m5:12:25 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/context/AuthContext.jsx, /src/pages/Dashboard.jsx, /src/pages/Login.jsx, /src/pages/MinhasFerias.jsx, /src/pages/SolicitarFerias.jsx, /src/pages/PendentesSetor.jsx, /src/pages/CalendarioSetor.jsx, /src/pages/Setores.jsx, /src/pages/Usuarios.jsx[22m
+[2m5:12:27 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/context/AuthContext.jsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m5:12:27 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/pages/Dashboard.jsx, /src/pages/Login.jsx, /src/pages/MinhasFerias.jsx, /src/pages/SolicitarFerias.jsx, /src/pages/PendentesSetor.jsx, /src/components/PrivateRoute.jsx, /src/pages/CalendarioSetor.jsx, /src/pages/Setores.jsx, /src/pages/Usuarios.jsx, /src/components/Layout.jsx[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m5:12:33 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/context/AuthContext.jsx[22m
+[2m5:12:33 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/context/AuthContext.jsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m5:12:33 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/pages/Dashboard.jsx, /src/pages/Login.jsx, /src/pages/MinhasFerias.jsx, /src/pages/SolicitarFerias.jsx, /src/pages/PendentesSetor.jsx, /src/components/PrivateRoute.jsx, /src/pages/CalendarioSetor.jsx, /src/pages/Setores.jsx, /src/pages/Usuarios.jsx, /src/components/Layout.jsx[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m5:12:51 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/Layout.jsx[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m5:13:34 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/Login.jsx[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m5:15:25 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/Dashboard.jsx[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m5:16:08 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SolicitarFerias.jsx[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m5:16:34 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/MinhasFerias.jsx[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m5:17:07 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/PendentesSetor.jsx[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m5:18:11 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/PrivateRoute.jsx[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m5:18:22 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m5:18:46 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m5:19:17 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SolicitarFerias.css[22m

@@ -811,19 +811,19 @@
     ]
   },
   "packageFolders": {
-    "/home/runner/.nuget/packages/": {}
+    "C:\\Users\\jose8\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/runner/workspace/GestaoFerias/src/GestaoFerias.Infrastructure/GestaoFerias.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\jose8\\OneDrive\\Desktop\\Projeto com Frontend\\projeto\\GestaoFerias\\src\\GestaoFerias.Infrastructure\\GestaoFerias.Infrastructure.csproj",
       "projectName": "GestaoFerias.Infrastructure",
-      "projectPath": "/home/runner/workspace/GestaoFerias/src/GestaoFerias.Infrastructure/GestaoFerias.Infrastructure.csproj",
-      "packagesPath": "/home/runner/.nuget/packages/",
-      "outputPath": "/home/runner/workspace/GestaoFerias/src/GestaoFerias.Infrastructure/obj/",
+      "projectPath": "C:\\Users\\jose8\\OneDrive\\Desktop\\Projeto com Frontend\\projeto\\GestaoFerias\\src\\GestaoFerias.Infrastructure\\GestaoFerias.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\jose8\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jose8\\OneDrive\\Desktop\\Projeto com Frontend\\projeto\\GestaoFerias\\src\\GestaoFerias.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/runner/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\jose8\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -835,11 +835,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/home/runner/workspace/GestaoFerias/src/GestaoFerias.Application/GestaoFerias.Application.csproj": {
-              "projectPath": "/home/runner/workspace/GestaoFerias/src/GestaoFerias.Application/GestaoFerias.Application.csproj"
+            "C:\\Users\\jose8\\OneDrive\\Desktop\\Projeto com Frontend\\projeto\\GestaoFerias\\src\\GestaoFerias.Application\\GestaoFerias.Application.csproj": {
+              "projectPath": "C:\\Users\\jose8\\OneDrive\\Desktop\\Projeto com Frontend\\projeto\\GestaoFerias\\src\\GestaoFerias.Application\\GestaoFerias.Application.csproj"
             },
-            "/home/runner/workspace/GestaoFerias/src/GestaoFerias.Domain/GestaoFerias.Domain.csproj": {
-              "projectPath": "/home/runner/workspace/GestaoFerias/src/GestaoFerias.Domain/GestaoFerias.Domain.csproj"
+            "C:\\Users\\jose8\\OneDrive\\Desktop\\Projeto com Frontend\\projeto\\GestaoFerias\\src\\GestaoFerias.Domain\\GestaoFerias.Domain.csproj": {
+              "projectPath": "C:\\Users\\jose8\\OneDrive\\Desktop\\Projeto com Frontend\\projeto\\GestaoFerias\\src\\GestaoFerias.Domain\\GestaoFerias.Domain.csproj"
             }
           }
         }
@@ -900,7 +900,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/nix/store/1blv644vinali34masnw6g5fjjjaa4y6-dotnet-sdk-8.0.416/share/dotnet/sdk/8.0.416/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

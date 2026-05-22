@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/runner/workspace/GestaoFerias/src/GestaoFerias.Domain/GestaoFerias.Domain.csproj": {}
+    "C:\\Users\\jose8\\OneDrive\\Desktop\\Projeto com Frontend\\projeto\\GestaoFerias\\src\\GestaoFerias.Domain\\GestaoFerias.Domain.csproj": {}
   },
   "projects": {
-    "/home/runner/workspace/GestaoFerias/src/GestaoFerias.Domain/GestaoFerias.Domain.csproj": {
+    "C:\\Users\\jose8\\OneDrive\\Desktop\\Projeto com Frontend\\projeto\\GestaoFerias\\src\\GestaoFerias.Domain\\GestaoFerias.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/runner/workspace/GestaoFerias/src/GestaoFerias.Domain/GestaoFerias.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\jose8\\OneDrive\\Desktop\\Projeto com Frontend\\projeto\\GestaoFerias\\src\\GestaoFerias.Domain\\GestaoFerias.Domain.csproj",
         "projectName": "GestaoFerias.Domain",
-        "projectPath": "/home/runner/workspace/GestaoFerias/src/GestaoFerias.Domain/GestaoFerias.Domain.csproj",
-        "packagesPath": "/home/runner/.nuget/packages/",
-        "outputPath": "/home/runner/workspace/GestaoFerias/src/GestaoFerias.Domain/obj/",
+        "projectPath": "C:\\Users\\jose8\\OneDrive\\Desktop\\Projeto com Frontend\\projeto\\GestaoFerias\\src\\GestaoFerias.Domain\\GestaoFerias.Domain.csproj",
+        "packagesPath": "C:\\Users\\jose8\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jose8\\OneDrive\\Desktop\\Projeto com Frontend\\projeto\\GestaoFerias\\src\\GestaoFerias.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/runner/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\jose8\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -58,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/nix/store/1blv644vinali34masnw6g5fjjjaa4y6-dotnet-sdk-8.0.416/share/dotnet/sdk/8.0.416/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

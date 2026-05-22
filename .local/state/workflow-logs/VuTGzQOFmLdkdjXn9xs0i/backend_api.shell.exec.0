@@ -1,0 +1,369 @@
+[?1h=Building...
+[?1h=[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (65ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (
+          SELECT 1 FROM pg_catalog.pg_class c
+          JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+          WHERE n.nspname='public' AND
+                c.relname='__EFMigrationsHistory'
+      )
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT "MigrationId", "ProductVersion"
+      FROM "__EFMigrationsHistory"
+      ORDER BY "MigrationId";
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (
+          SELECT 1 FROM pg_catalog.pg_class c
+          JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+          WHERE n.nspname='public' AND
+                c.relname='__EFMigrationsHistory'
+      )
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (
+          SELECT 1 FROM pg_catalog.pg_class c
+          JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+          WHERE n.nspname='public' AND
+                c.relname='__EFMigrationsHistory'
+      )
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT "MigrationId", "ProductVersion"
+      FROM "__EFMigrationsHistory"
+      ORDER BY "MigrationId";
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Migrations[20405]
+      No migrations were applied. The database is already up to date.
+[40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://0.0.0.0:8080
+[40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+[40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+[40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+      Content root path: /home/runner/workspace/GestaoFerias/src/GestaoFerias.API
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (13ms) [Parameters=[@__request_Matricula_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT u."Id", u."Matricula", u."Nome", u."PasswordHash", u."Role", u."SetorId"
+      FROM "Usuarios" AS u
+      WHERE u."Matricula" = @__request_Matricula_0
+      LIMIT 1
+[41m[30mfail[39m[22m[49m: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]
+      An unhandled exception has occurred while executing the request.
+      System.Exception: Dados incorretos. Tente novamente.
+         at GestaoFerias.Infrastructure.Services.AuthService.Login(LoginRequest request) in /home/runner/workspace/GestaoFerias/src/GestaoFerias.Infrastructure/Services/AuthService.cs:line 103
+         at GestaoFerias.API.Controllers.AuthController.Login(LoginRequest request) in /home/runner/workspace/GestaoFerias/src/GestaoFerias.API/Controllers/AuthController.cs:line 38
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+         at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+         at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+         at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT u."Matricula"
+      FROM "Usuarios" AS u
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (48ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Usuarios" ("Id", "Matricula", "Nome", "PasswordHash", "Role", "SetorId")
+      VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[@__ToLower_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT s."Id", s."LimiteFeriasSimultaneas", s."Nome"
+      FROM "Setores" AS s
+      WHERE lower(s."Nome") = @__ToLower_0
+      LIMIT 1
+[41m[30mfail[39m[22m[49m: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]
+      An unhandled exception has occurred while executing the request.
+      System.Exception: Setor 'Enfermagem' não encontrado.
+         at GestaoFerias.Infrastructure.Services.AuthService.Register(RegisterRequest request) in /home/runner/workspace/GestaoFerias/src/GestaoFerias.Infrastructure/Services/AuthService.cs:line 66
+         at GestaoFerias.API.Controllers.AuthController.Register(RegisterRequest request) in /home/runner/workspace/GestaoFerias/src/GestaoFerias.API/Controllers/AuthController.cs:line 26
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+         at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+         at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+         at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT s."Id", s."LimiteFeriasSimultaneas", s."Nome"
+      FROM "Setores" AS s
+      WHERE lower(s."Nome") = @__ToLower_0
+      LIMIT 1
+[41m[30mfail[39m[22m[49m: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]
+      An unhandled exception has occurred while executing the request.
+      System.Exception: Setor 'Radiologia' não encontrado.
+         at GestaoFerias.Infrastructure.Services.AuthService.Register(RegisterRequest request) in /home/runner/workspace/GestaoFerias/src/GestaoFerias.Infrastructure/Services/AuthService.cs:line 66
+         at GestaoFerias.API.Controllers.AuthController.Register(RegisterRequest request) in /home/runner/workspace/GestaoFerias/src/GestaoFerias.API/Controllers/AuthController.cs:line 26
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+         at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+         at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+         at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT s."Id", s."LimiteFeriasSimultaneas", s."Nome"
+      FROM "Setores" AS s
+      WHERE lower(s."Nome") = @__ToLower_0
+      LIMIT 1
+[41m[30mfail[39m[22m[49m: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]
+      An unhandled exception has occurred while executing the request.
+      System.Exception: Setor 'Enfermagem' não encontrado.
+         at GestaoFerias.Infrastructure.Services.AuthService.Register(RegisterRequest request) in /home/runner/workspace/GestaoFerias/src/GestaoFerias.Infrastructure/Services/AuthService.cs:line 66
+         at GestaoFerias.API.Controllers.AuthController.Register(RegisterRequest request) in /home/runner/workspace/GestaoFerias/src/GestaoFerias.API/Controllers/AuthController.cs:line 26
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+         at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+         at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+         at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT s."Id", s."LimiteFeriasSimultaneas", s."Nome"
+      FROM "Setores" AS s
+      WHERE lower(s."Nome") = @__ToLower_0
+      LIMIT 1
+[41m[30mfail[39m[22m[49m: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]
+      An unhandled exception has occurred while executing the request.
+      System.Exception: Setor 'Radiologia' não encontrado.
+         at GestaoFerias.Infrastructure.Services.AuthService.Register(RegisterRequest request) in /home/runner/workspace/GestaoFerias/src/GestaoFerias.Infrastructure/Services/AuthService.cs:line 66
+         at GestaoFerias.API.Controllers.AuthController.Register(RegisterRequest request) in /home/runner/workspace/GestaoFerias/src/GestaoFerias.API/Controllers/AuthController.cs:line 26
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+         at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+         at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+         at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT u."Matricula"
+      FROM "Usuarios" AS u
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Usuarios" ("Id", "Matricula", "Nome", "PasswordHash", "Role", "SetorId")
+      VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__request_Matricula_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT u."Id", u."Matricula", u."Nome", u."PasswordHash", u."Role", u."SetorId"
+      FROM "Usuarios" AS u
+      WHERE u."Matricula" = @__request_Matricula_0
+      LIMIT 1
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (
+          SELECT 1
+          FROM "Setores" AS s
+          WHERE lower(s."Nome") = @__ToLower_0)
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?'], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Setores" ("Id", "LimiteFeriasSimultaneas", "Nome")
+      VALUES (@p0, @p1, @p2);
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (
+          SELECT 1
+          FROM "Setores" AS s
+          WHERE lower(s."Nome") = @__ToLower_0)
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?'], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Setores" ("Id", "LimiteFeriasSimultaneas", "Nome")
+      VALUES (@p0, @p1, @p2);
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (
+          SELECT 1
+          FROM "Setores" AS s
+          WHERE lower(s."Nome") = @__ToLower_0)
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?'], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Setores" ("Id", "LimiteFeriasSimultaneas", "Nome")
+      VALUES (@p0, @p1, @p2);
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (
+          SELECT 1
+          FROM "Setores" AS s
+          WHERE lower(s."Nome") = @__ToLower_0)
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?'], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Setores" ("Id", "LimiteFeriasSimultaneas", "Nome")
+      VALUES (@p0, @p1, @p2);
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (
+          SELECT 1
+          FROM "Setores" AS s
+          WHERE lower(s."Nome") = @__ToLower_0)
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?'], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Setores" ("Id", "LimiteFeriasSimultaneas", "Nome")
+      VALUES (@p0, @p1, @p2);
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__request_Matricula_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT u."Id", u."Matricula", u."Nome", u."PasswordHash", u."Role", u."SetorId"
+      FROM "Usuarios" AS u
+      WHERE u."Matricula" = @__request_Matricula_0
+      LIMIT 1
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[@__ToLower_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT s."Id", s."LimiteFeriasSimultaneas", s."Nome"
+      FROM "Setores" AS s
+      WHERE lower(s."Nome") = @__ToLower_0
+      LIMIT 1
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT u."Matricula"
+      FROM "Usuarios" AS u
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Usuarios" ("Id", "Matricula", "Nome", "PasswordHash", "Role", "SetorId")
+      VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT s."Id", s."LimiteFeriasSimultaneas", s."Nome"
+      FROM "Setores" AS s
+      WHERE lower(s."Nome") = @__ToLower_0
+      LIMIT 1
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT u."Matricula"
+      FROM "Usuarios" AS u
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Usuarios" ("Id", "Matricula", "Nome", "PasswordHash", "Role", "SetorId")
+      VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT s."Id", s."LimiteFeriasSimultaneas", s."Nome"
+      FROM "Setores" AS s
+      WHERE lower(s."Nome") = @__ToLower_0
+      LIMIT 1
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT u."Matricula"
+      FROM "Usuarios" AS u
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Usuarios" ("Id", "Matricula", "Nome", "PasswordHash", "Role", "SetorId")
+      VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT s."Id", s."LimiteFeriasSimultaneas", s."Nome"
+      FROM "Setores" AS s
+      WHERE lower(s."Nome") = @__ToLower_0
+      LIMIT 1
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT u."Matricula"
+      FROM "Usuarios" AS u
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Usuarios" ("Id", "Matricula", "Nome", "PasswordHash", "Role", "SetorId")
+      VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT u."Matricula"
+      FROM "Usuarios" AS u
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Usuarios" ("Id", "Matricula", "Nome", "PasswordHash", "Role", "SetorId")
+      VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__request_Matricula_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT u."Id", u."Matricula", u."Nome", u."PasswordHash", u."Role", u."SetorId"
+      FROM "Usuarios" AS u
+      WHERE u."Matricula" = @__request_Matricula_0
+      LIMIT 1
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__request_Matricula_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT u."Id", u."Matricula", u."Nome", u."PasswordHash", u."Role", u."SetorId"
+      FROM "Usuarios" AS u
+      WHERE u."Matricula" = @__request_Matricula_0
+      LIMIT 1
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__request_Matricula_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT u."Id", u."Matricula", u."Nome", u."PasswordHash", u."Role", u."SetorId"
+      FROM "Usuarios" AS u
+      WHERE u."Matricula" = @__request_Matricula_0
+      LIMIT 1
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[@__request_Matricula_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT u."Id", u."Matricula", u."Nome", u."PasswordHash", u."Role", u."SetorId"
+      FROM "Usuarios" AS u
+      WHERE u."Matricula" = @__request_Matricula_0
+      LIMIT 1
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__matricula_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT u."Id", u."Matricula", u."Nome", u."PasswordHash", u."Role", u."SetorId", s."Id", s."LimiteFeriasSimultaneas", s."Nome"
+      FROM "Usuarios" AS u
+      INNER JOIN "Setores" AS s ON u."SetorId" = s."Id"
+      WHERE u."Matricula" = @__matricula_0
+      LIMIT 1
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[@__usuario_Id_0='?' (DbType = Guid), @__anoAtual_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT f."Id", f."Adiant13", f."AdiantFerias", f."AprovadoChefiaEm", f."AprovadoChefiaPorId", f."AprovadoEm", f."AprovadoPorId", f."CreatedAt", f."MotivoNegacao", f."SetorId", f."Status", f."UsuarioId"
+      FROM "Ferias" AS f
+      WHERE f."UsuarioId" = @__usuario_Id_0 AND date_part('year', f."CreatedAt" AT TIME ZONE 'UTC')::int = @__anoAtual_1 AND f."Status" IN (0, 1)
+      LIMIT 1
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__setorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT s."Id", s."LimiteFeriasSimultaneas", s."Nome"
+      FROM "Setores" AS s
+      WHERE s."Id" = @__setorId_0
+      LIMIT 1
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[@__setorId_0='?' (DbType = Guid), @__max_1='?' (DbType = Date), @__min_2='?' (DbType = Date)], CommandType='Text', CommandTimeout='30']
+      SELECT f."Inicio", f."Fim", f0."Status"
+      FROM "FeriasPeriodos" AS f
+      INNER JOIN "Ferias" AS f0 ON f."FeriasId" = f0."Id"
+      WHERE f0."SetorId" = @__setorId_0 AND f0."Status" IN (2, 1, 0) AND f."Inicio" <= @__max_1 AND @__min_2 <= f."Fim"
+[40m[32minfo[39m[22m[49m: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (8ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Boolean), @p2='?' (DbType = DateTime), @p3='?' (DbType = Guid), @p4='?' (DbType = DateTime), @p5='?' (DbType = Guid), @p6='?' (DbType = DateTime), @p7='?', @p8='?' (DbType = Guid), @p9='?' (DbType = Int32), @p10='?' (DbType = Guid), @p11='?' (DbType = Guid), @p12='?' (DbType = Guid), @p13='?' (DbType = Date), @p14='?' (DbType = Date)], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Ferias" ("Id", "AdiantFerias", "AprovadoChefiaEm", "AprovadoChefiaPorId", "AprovadoEm", "AprovadoPorId", "CreatedAt", "MotivoNegacao", "SetorId", "Status", "UsuarioId")
+      VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+      RETURNING "Adiant13";
+      INSERT INTO "FeriasPeriodos" ("Id", "FeriasId", "Fim", "Inicio")
+      VALUES (@p11, @p12, @p13, @p14);
